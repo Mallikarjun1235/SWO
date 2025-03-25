@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Configuration Generator</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Website Configuration Generator</h2>
+      <div class="form-group">
+        <label for="inputType">Choose Input Type:</label>
+        <select
+          id="inputType"
+          name="inputType"
+          onchange="handleSelection()"
+          required
+        >
+          <option value="">-- Select --</option>
+          <option value="userInput">User Input</option>
+          <option value="excelUpload">Excel Upload</option>
+        </select>
+      </div>
+
+      <!-- User Input Section -->
+      <div id="userInputSection" style="display: none">
+        <h2>User Input Form</h2>
+        <form id="userInputForm">
+          <div class="form-group">
+            <label for="sourceId">Enter sourceId:</label>
+            <input type="text" id="sourceId" name="sourceId" required />
+          </div>
+          <div class="form-group">
+            <label for="sourceName">Enter sourceName:</label>
+            <input type="text" id="sourceName" name="sourceName" required />
+          </div>
+          <div class="form-group">
+            <label for="marketplaceIds"
+              >Enter marketplaceIds (comma separated):</label
+            >
+            <input
+              type="text"
+              id="marketplaceIds"
+              name="marketplaceIds"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="sdoProductStrategy"
+              >Select sdoProductStrategy value:</label
+            >
+            <select id="sdoProductStrategy" name="sdoProductStrategy" required>
+              <option value="detail">detail</option>
+              <option value="browse">browse</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="programName">Select programName:</label>
+            <select
+              id="programName"
+              name="programName"
+              required
+              onchange="handleProgramSelection()"
+            >
+              <option value="">-- Select --</option>
+              <option value="SelectionGapClosure">SelectionGapClosure</option>
+              <option value="SourceInsights">SourceInsights</option>
+            </select>
+          </div>
+          <div id="dynamicFields"></div>
+          <div class="form-group">
+            <button type="submit" class="submit-btn">Submit</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Excel Upload Section -->
+      <div id="excelUploadSection" style="display: none">
+        <h2>Excel Upload</h2>
+        <form id="excelUploadForm">
+          <div class="form-group">
+            <label for="brandOrCompetitor">Select Type:</label>
+            <select id="brandOrCompetitor" name="brandOrCompetitor" required>
+              <option value="Brand">Brand</option>
+              <option value="Competitor">Competitor</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="swoUpload">Upload SWO File:</label>
+            <input
+              type="file"
+              id="swoUpload"
+              name="swoUpload"
+              accept=".xlsx, .xls"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="metricsUpload">Upload Metrics File:</label>
+            <input
+              type="file"
+              id="metricsUpload"
+              name="metricsUpload"
+              accept=".xlsx, .xls"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <button type="submit" class="submit-btn">Upload</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Results Section -->
+      <div id="resultsSection" style="display: none">
+        <h2>Results</h2>
+        <div id="resultMessages"></div>
+        <div id="downloadLinks" class="download-section"></div>
+      </div>
+
+      <!-- Loading Spinner -->
+      <div id="loadingSpinner" class="loading-spinner" style="display: none">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>
